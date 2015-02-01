@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use Getopt::Long;
+no warnings 'uninitialized';
 
 my $dna_alignment;
 my $len;
@@ -155,7 +156,7 @@ foreach (sort {$a<=>$b} keys %h1) {
 	}
 	if ($prot !~ /\*/ && $dna =~ /[A|T|C|G]|[a|t|c|g]/) {
 		$sp1{$_."_2"} = $dna;
-		push (@ff, $_."_1");
+		push (@ff, $_."_2");
 	}
 
 	@seq = ();
@@ -173,7 +174,7 @@ foreach (sort {$a<=>$b} keys %h1) {
 	}
 	if ($prot !~ /\*/ && $dna =~ /[A|T|C|G]|[a|t|c|g]/) {
 		$sp1{$_."_3"} = $dna;
-		push (@ff, $_."_1");
+		push (@ff, $_."_3");
 	}
 }
 
@@ -214,7 +215,7 @@ foreach (sort {$a<=>$b} keys %h2) {
 	}
 	if ($prot !~ /\*/ && $dna =~ /[A|T|C|G]|[a|t|c|g]/) {
 		$sp2{$_."_2"} = $dna;
-		push (@ff, $_."_1");
+		push (@ff, $_."_2");
 	}
 
 	@seq = ();
@@ -232,7 +233,7 @@ foreach (sort {$a<=>$b} keys %h2) {
 	}
 	if ($prot !~ /\*/ && $dna =~ /[A|T|C|G]|[a|t|c|g]/) {
 		$sp2{$_."_3"} = $dna;
-		push (@ff, $_."_1");
+		push (@ff, $_."_3");
 	}
 }
 
@@ -258,7 +259,7 @@ foreach my $i (@uniq_ff) {
 }
 
 if (length($seq1) <= $len) {
-	warn "Sequence has length $len, and is too short!\n";
+	warn "Sequences $header1 and $header2 have length $len, and are too short!\n";
 }
 else {
 	print OUT $header1, "\n", $seq1, "\n";
