@@ -49,6 +49,32 @@ Run as so:
 
 ---
 
-###rscu.pl: Estimates Relative Synonymous Codon Usage (RSCU)
+###rscu.pl: Estimate Relative Synonymous Codon Usage (RSCU)
+
+This script will estimate RSCU for all sequences (that start with ATG, and end with TGA, TAA, or TAG) in a fasta file:
 
 ![equation](http://www.sciweavers.org/tex2img.php?eq=RSCU_%7Bi%7D%20%3D%20%20%20%5Cfrac%7BX_%7Bi%7D%7D%7B%5Cfrac%7B1%7D%7Bn%7D%20.%20%5Csum_i%5En%20%20X_%7Bi%7D%7D%20%20%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+
+n is the number of synonymous codons (1≤n≤6)
+i is the codon
+X is the number of occurrences of codon i in a protein
+
+The RSCU value for a codon is the number of occurrences observed divided by the number of occurrences expected without bias. If each synonymous codon is used with equal frequency then RSCU will be 1.
+
+The outfile is a tab delimited table with the following columns:
+
+| Column name | Description |
+| --- | --- |
+| locus | Fasta header; name of the protein |
+| aa | IUPAC amino acid symbol |
+| codon | Codon trinucleotide sequence |
+| syn | The number of synonymous codons for a particular amino acid |
+| obs | The number of times the codon was observed in the protein |
+| total | Total number of synonymous codons for a particular amino acid observed in the protein |
+| RSCU | See above equation |
+
+Run as so:
+
+````bash
+./rscu.pl --fasta= --outfile=
+````
