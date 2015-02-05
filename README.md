@@ -53,9 +53,9 @@ Run as so:
 
 This script will estimate RSCU for all sequences (that start with ATG, and end with TGA, TAA, or TAG) in a fasta file:
 
-->![equation](http://www.sciweavers.org/download/Tex2Img_1423101951.jpg)<-
+![equation](http://www.sciweavers.org/download/Tex2Img_1423101951.jpg)
 
-n is the number of synonymous codons (1≤n≤6)
+->n is the number of synonymous codons (1≤n≤6)<-
 i is the codon
 X is the number of occurrences of codon i in a protein
 
