@@ -55,9 +55,9 @@ This script will estimate RSCU for all sequences (that start with ATG, and end w
 
 ![equation](http://www.sciweavers.org/download/Tex2Img_1423101951.jpg)
 
-n is the number of synonymous codons (1≤n≤6)
-i is the codon
-X is the number of occurrences of codon i in a protein
+* n is the number of synonymous codons (1≤n≤6)
+* i is the codon
+* X is the number of occurrences of codon i in a protein
 
 The RSCU value for a codon is the number of occurrences observed divided by the number of occurrences expected without bias. If each synonymous codon is used with equal frequency then RSCU will be 1.
 
