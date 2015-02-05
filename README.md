@@ -73,8 +73,8 @@ The outfile is a tab delimited table with the following columns:
 | total | Total number of synonymous codons for a particular amino acid observed in the protein |
 | RSCU | See above equation |
 
-Run as so:
+Run as so (see --help for me details):
 
 ````bash
-./rscu.pl --fasta= --outfile=
+./rscu.pl --fasta= --complete=yes/no --outfile=
 ````

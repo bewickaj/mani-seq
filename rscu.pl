@@ -11,13 +11,14 @@ my $help;
 if (@ARGV > 0) {
 	GetOptions (
 		'fasta:s' => \$fasta,
+		'complete:s' => \$complete,
 		'outfile:s' => \$out,
 		'help' => \$help
 	);
 }
 
 if ($help) {
-	print "Usage: --fasta=\"name of fasta file\" --outfile=\"file name of outfile to write to\"\n";
+	print "Usage: --fasta=\"name of fasta file\" --complete=\"yes: the majority of your sequences start with ATG and end with TAA, TGA, or TAG; no: most of your sequences are partially complete, but still in-frame\" --outfile=\"file name of outfile to write to\"\n";
 	exit;
 }
 
@@ -77,7 +78,35 @@ print OUT "locus\taa\tcodon\tsyn\tobs\ttotal\tRSCU\n";
 
 foreach (keys %fasta) {
 	my %hoh;
-	if ($fasta{$_} =~ /^ATG/ && $fasta{$_} =~ /[TAA|TAG|TGA]$/) {
+	if ($complete eq "yes") {
+		if ($fasta{$_} =~ /^ATG/ && $fasta{$_} =~ /[TAA|TAG|TGA]$/) {
+			my $codon;
+			my @seq = split('', $fasta{$_});
+			for my $nt (@seq) {
+				$codon .= $nt;
+				if (length($codon) == 3) {
+					if ($codon =~ /[W|S|M|K|R|Y|B|D|H|V|N]/) {
+						next;
+					}
+					else {
+						$hoh{$codontable{$codon}}{$codon}++;
+						$codon = '';
+					}
+				}
+			}
+			foreach my $aa (keys %hoh) {
+				my $sum;		
+				foreach my $codon (keys %{$hoh{$aa}}) {
+					$sum += $hoh{$aa}{$codon};
+				}
+				foreach my $codon (keys %{$hoh{$aa}}) {
+					my $rscu = $hoh{$aa}{$codon} / ((1 / $syncount{$aa}) * ($sum));
+					print OUT "$_\t$aa\t$codon\t$syncount{$aa}\t$hoh{$aa}{$codon}\t$sum\t$rscu\n";
+				}
+			}
+		}
+	}
+	elsif ($complete eq "no") {
 		my $codon;
 		my @seq = split('', $fasta{$_});
 		for my $nt (@seq) {
@@ -102,5 +131,5 @@ foreach (keys %fasta) {
 				print OUT "$_\t$aa\t$codon\t$syncount{$aa}\t$hoh{$aa}{$codon}\t$sum\t$rscu\n";
 			}
 		}
-	}
+	}		
 }
