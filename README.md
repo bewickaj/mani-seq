@@ -53,7 +53,7 @@ Run as so:
 
 This script will estimate RSCU for all sequences (that start with ATG, and end with TGA, TAA, or TAG) in a fasta file:
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=RSCU_%7Bi%7D%20%3D%20%20%20%5Cfrac%7BX_%7Bi%7D%7D%7B%5Cfrac%7B1%7D%7Bn%7D%20.%20%5Csum_i%5En%20%20X_%7Bi%7D%7D%20%20%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+![equation](http://www.sciweavers.org/download/Tex2Img_1423101951.jpg)
 
 n is the number of synonymous codons (1≤n≤6)
 i is the codon
