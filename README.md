@@ -29,8 +29,6 @@ A similar script to indel_remover_vprot.pl, however only a DNA pairwise DNA sequ
 
 I have added a --length flag, so you can specify a length (bp) cutoff for your concatenated sequences. How short do you go? The general consensus is no less than 300bp (100aa) for downstream applications like phylogenetic tree construction and substitution rate estimates.
 
-Also, the script sometimes prints "Use of uninitialized value $prot in pattern match (m//)..." and "Use of uninitialized value $dna in pattern match (m//)..." warnings around the lines with "if ($prot !~ /\*/ && $dna =~ /[A|T|C|G]|[a|t|c|g]/) {" for some pairwise alignments. As far as I can tell the script works, and probably has something to do with undefined protein and DNA sequences (variable). I am looking into this, but I have added "no warnings 'uninitialized';" to stop the warning messages in the mean time.
-
 Run as so:
 
 ````bash
@@ -39,7 +37,7 @@ Run as so:
 
 ---
 
-###Wrapper to run indel_remover_vdna.pl and PAML
+###indel_remover_vdna_wrapper.pl: Wrapper to run indel_remover_vdna.pl and PAML
 
 A wrapper to glob up MUSCLE alignment files, and run the indel_remover_vdna.pl script. The outfiles from the indel_remover_vdna.pl script are then globbed-up and PAML's yn00 program for pairwise sequence alignment is executed. You need to provide the name of MUSCLE DNA alignment fasta file **EXTENSION** to glob for indel_remover_vdna.pl script, the length (bp) requirement of final concatenated sequence for indel_remover_vdna.pl script, and the name of indel-removed DNA alignment fasta file **EXTENSION** to glob for PAML analysis. All MUSCLE alignments must be in the same folder.
 
@@ -50,3 +48,7 @@ Run as so:
 ````
 
 ---
+
+###rscu.pl: Estimates Relative Synonymous Codon Usage (RSCU)
+
+![equation](http://www.sciweavers.org/tex2img.php?eq=RSCU_%7Bi%7D%20%3D%20%20%20%5Cfrac%7BX_%7Bi%7D%7D%7B%5Cfrac%7B1%7D%7Bn%7D%20.%20%5Csum_i%5En%20%20X_%7Bi%7D%7D%20%20%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)

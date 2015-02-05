@@ -122,10 +122,10 @@ my @ff;
 #Puts each DNA fragment into each coding frame, and tests for stop codons in species 1
 
 foreach (sort {$a<=>$b} keys %h1) {
-	my @seq;
-	my $codon;
-	my $prot;
-	my $dna;
+	my @seq = ();
+	my $codon = '';
+	my $prot = '';
+	my $dna = '';
 	
 	@seq = split('', $h1{$_});
 	for my $i (0 .. $#seq) {
@@ -181,10 +181,10 @@ foreach (sort {$a<=>$b} keys %h1) {
 #Puts each DNA fragment into each coding frame, and tests for stop codons in species 2
 
 foreach (sort {$a<=>$b} keys %h2) {
-	my @seq;
-	my $codon;
-	my $prot;
-	my $dna;
+	my @seq = ();
+	my $codon = '';
+	my $prot = '';
+	my $dna = '';
 	
 	@seq = split('', $h2{$_});
 	for my $i (0 .. $#seq) {
