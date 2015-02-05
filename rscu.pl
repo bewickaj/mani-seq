@@ -5,6 +5,7 @@ use warnings;
 use Getopt::Long;
 
 my $fasta;
+my $complete;
 my $out;
 my $help;
 
