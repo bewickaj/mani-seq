@@ -41,7 +41,7 @@ system("find . -size 0 -delete");
 while (defined(my $file = glob "\*$rmindel")) {
 	open my $fh, "<", $file;
 	foreach (defined( my $line = <$fh> )) {
-		my $ext_len = length($muscle);
+		my $ext_len = length($rmindel);
 		my $core = substr ($file, 0, -($ext_len));
 		
 		open CTL, ">$core\.ctl", or die;

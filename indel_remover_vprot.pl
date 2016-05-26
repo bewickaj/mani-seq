@@ -120,7 +120,7 @@ foreach my $header (keys %dna) {
 				next;
 			}
 			else {
-				$dna_inel{$header}{$c} = $codon;
+				$dna_indel{$header}{$c} = $codon;
 			}
 			$codon = '';
 		}

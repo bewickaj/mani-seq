@@ -100,7 +100,7 @@ foreach (sort {$a<=>$b} keys %sp1) {
 
 #Removes stop codon positions from end of last fragment in both species
 
-foreach (sort {$a<=>$b} (keys %h1)[-1]) {
+foreach (sort {$a<=>$b} keys %h1) {
 	if (exists $h2{$_} && ($h1{$_} =~ /TAA$|TGA$|TAG$/ || $h2{$_} =~ /TAA$|TGA$|TAG$/)) {
 		$h1{$_} = substr($h1{$_}, 0, -3);
 		$h2{$_} = substr($h2{$_}, 0, -3);
@@ -109,6 +109,14 @@ foreach (sort {$a<=>$b} (keys %h1)[-1]) {
 		next;
 	}
 }
+
+#foreach (sort {$a<=>$b} keys %h1) {
+#	print $_, "\n", $h1{$_}, "\n";
+#}
+#foreach (sort {$a<=>$b} keys %h2) {
+#	print $_, "\n", $h2{$_}, "\n";
+#}
+
 
 for (keys %sp1) {
 	delete $sp1{$_};
@@ -130,7 +138,7 @@ foreach (sort {$a<=>$b} keys %h1) {
 	@seq = split('', $h1{$_});
 	for my $i (0 .. $#seq) {
 		$codon .= $seq[$i];
-		if (($i + 1) % 3 == 0) {
+		if ($i % 3 == 0) {
 			$prot .= $codontable{$codon};
 			$dna .= $codon;
 			$codon = '';
@@ -148,7 +156,7 @@ foreach (sort {$a<=>$b} keys %h1) {
 
 	for my $i (0 .. $#seq) {
 		$codon .= $seq[$i];
-		if (($i + 2) % 3 == 0) {
+		if (($i + 1) % 3 == 0) {
 			$prot .= $codontable{$codon};
 			$dna .= $codon;
 			$codon = '';
@@ -166,7 +174,7 @@ foreach (sort {$a<=>$b} keys %h1) {
 
 	for my $i (0 .. $#seq) {	
 		$codon .= $seq[$i];
-		if (($i + 3) % 3 == 0) {
+		if (($i + 2) % 3 == 0) {
 			$prot .= $codontable{$codon};
 			$dna .= $codon;
 			$codon = '';
@@ -189,7 +197,7 @@ foreach (sort {$a<=>$b} keys %h2) {
 	@seq = split('', $h2{$_});
 	for my $i (0 .. $#seq) {
 		$codon .= $seq[$i];
-		if (($i + 1) % 3 == 0) {
+		if ($i % 3 == 0) {
 			$prot .= $codontable{$codon};
 			$dna .= $codon;
 			$codon = '';
@@ -207,7 +215,7 @@ foreach (sort {$a<=>$b} keys %h2) {
 
 	for my $i (0 .. $#seq) {
 		$codon .= $seq[$i];
-		if (($i + 2) % 3 == 0) {
+		if (($i + 1) % 3 == 0) {
 			$prot .= $codontable{$codon};
 			$dna .= $codon;
 			$codon = '';
@@ -225,7 +233,7 @@ foreach (sort {$a<=>$b} keys %h2) {
 
 	for my $i (0 .. $#seq) {	
 		$codon .= $seq[$i];
-		if (($i + 3) % 3 == 0) {
+		if (($i + 2) % 3 == 0) {
 			$prot .= $codontable{$codon};
 			$dna .= $codon;
 			$codon = '';
@@ -249,7 +257,7 @@ my $seq2;
 #Combines fragments that are found in both species and in the same frame
 
 foreach my $i (@uniq_ff) {
-	if (exists $sp1{$i} && $sp2{$i}) {
+	if (exists $sp1{$i} && $sp2{$i} && length($sp1{$i}) >= 30 && length($sp2{$i}) >= 30) {
 		$seq1 .= $sp1{$i};
 		$seq2 .= $sp2{$i};
 	}
